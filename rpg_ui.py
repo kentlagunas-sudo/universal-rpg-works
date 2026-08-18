@@ -142,6 +142,7 @@ if not st.session_state.game_started:
             except Exception as e:
                 # THIS IS THE MAGIC LINE WE ADDED!
                 st.error(f"🚨 CONNECTION ERROR: {e}")
+                st.stop()
                 
                 print(f"Parsing error: {e}")
                 st.session_state.inventory = ["silver dagger", "travel cloak"]
