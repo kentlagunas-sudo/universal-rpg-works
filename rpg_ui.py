@@ -13,12 +13,14 @@ try:
 except:
     PLAYER2_API_KEY = "PASTE_YOUR_PLAYER2_API_KEY_HERE_IF_TESTING_LOCALLY"
 
+# We are going to explicitly point it and use standard authorization headers just in case
 client = OpenAI(
     base_url="https://api.player2.game/v1",
-    api_key=PLAYER2_API_KEY
+    api_key=PLAYER2_API_KEY,
+    default_headers={"Authorization": f"Bearer {PLAYER2_API_KEY}"}
 )
 
-MODEL_NAME = "default" 
+MODEL_NAME = "default"
 
 SYSTEM_PROMPT = "You are an expert Game Master for a gritty, fiction-first RPG. Read the [SYSTEM DATA] for mechanical state, but NEVER read it out loud. Respond ONLY with immersive, cinematic narrative addressing the player directly. If the system data shows a roll result, narrate the outcome based on that. End every response by asking 'What do you do?'"
 
