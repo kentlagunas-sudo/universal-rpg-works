@@ -8,7 +8,6 @@ from openai import OpenAI
 st.set_page_config(page_title="Universal RPG", page_icon="🎲", layout="wide")
 
 # --- AI SETUP (Player2 Cloud Connection) ---
-# Pulls your API key securely from Streamlit Cloud's secret vault!
 try:
     PLAYER2_API_KEY = st.secrets["PLAYER2_API_KEY"]
 except:
@@ -141,6 +140,9 @@ if not st.session_state.game_started:
                         except: pass
 
             except Exception as e:
+                # THIS IS THE MAGIC LINE WE ADDED!
+                st.error(f"🚨 CONNECTION ERROR: {e}")
+                
                 print(f"Parsing error: {e}")
                 st.session_state.inventory = ["silver dagger", "travel cloak"]
                 st.session_state.bag = []
@@ -415,4 +417,4 @@ else:
                         st.markdown(reply_text)
                         st.rerun()
                     except Exception as e:
-                        st.error(f"Player2 API Error: {e}")
+                        st.error(f"🚨 CONNECTION ERROR: {e}")
